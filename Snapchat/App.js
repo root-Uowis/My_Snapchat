@@ -1,80 +1,17 @@
-import React, {useState,useEffect} from 'react';
-import { StyleSheet, Text, View,TouchableOpacity } from 'react-native';
-import { Container, Content } from 'native-base';
-import Swiper from 'react-native-swiper';
-import { Camera } from 'expo-camera';
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Router, Scene } from 'react-native-router-flux'
+import Inscription from './Components/Inscription.js'
+import Connection from './Components/Connection.js'
 
 export default function App() {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
-  if (hasPermission === null) {
-    return <View />;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
   return (
-    <Container>
-      <Content>
-        <Swiper
-          loop={false}
-          showsPagination={false}
-          index={1}
-        >
-          <View style={styles.container}>
-            <Text style={styles.text}> Snap </Text>
-          </View >
-          <Swiper
-            loop={false}
-            showsPagination={false}
-            horizontal={false}
-            index={0}
-          >
-            <View style={{ flex: 1 }}>
-              <Camera style={{ flex: 1 }} type={type}>
-                <View
-                  style={{
-                    flex: 1,
-                    backgroundColor: 'transparent',
-                    flexDirection: 'row',
-                  }}>
-                  <TouchableOpacity
-                    style={{
-                      flex: 0.1,
-                      alignSelf: 'flex-end',
-                      alignItems: 'center',
-                    }}
-                    onPress={() => {
-                      setType(
-                        type === Camera.Constants.Type.back
-                          ? Camera.Constants.Type.front
-                          : Camera.Constants.Type.back
-                      );
-                    }}>
-                    <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
-                  </TouchableOpacity>
-                </View>
-              </Camera>
-            </View>
-            <View style={styles.container}>
-              <Text style={styles.text}> Memories </Text>
-            </View >
-          </Swiper>
-          <View style={styles.container}>
-            <Text style={styles.text} > Stories
-              </Text>
-          </View >
-        </Swiper>
-      </Content >
-    </Container>
+    <Router>
+      <Scene key= "root">
+         <Scene key= "inscription" component = {Inscription} title = "inscription" initial = {true} />
+         <Scene key= "connection" component = {Connection} title = "Connection" />
+      </Scene>
+   </Router>
   );
 }
 
