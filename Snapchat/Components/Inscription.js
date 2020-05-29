@@ -1,8 +1,10 @@
 import React from 'react'
-import { Text, Button, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { Button, Input } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { Formik } from 'formik';
-import axios  from 'axios';
+import axios from 'axios';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const goToConnection = () => {
     Actions.connection()
@@ -12,33 +14,78 @@ const Inscription = () => {
     return (
         <Formik
             initialValues={{ email: '', password: '' }}
-            onSubmit={values => axios.post(`http://snapi.epitech.eu/inscription/`, values).then(response => {
-                if (response.data.status) {
-                    console.log(response);
+            onSubmit={values => axios.post(`http://snapi.epitech.eu/inscription/?email=${values.email}&password=${values.password}`).then(status => {
+                console.log(status);
+                if (status.status == 200) {
+                    goToConnection()
+                    alert('U are registered')
                 }
-            }).catch(error => { console.log(error) })}
+            }).catch(error => {
+                console.log(error)
+            })}
+
         >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
-                <View>
-                    <TextInput
+                <View >
+                    <Input
                         onChangeText={handleChange('email')}
                         onBlur={handleBlur('email')}
                         value={values.email}
-                        placeholder={'email'}
-
+                        placeholder='Email'
+                        leftIcon={
+                            <Icon
+                                name='user'
+                                size={24}
+                                color='black'
+                            />
+                        }
                     />
-                    <TextInput
+
+
+                    <Input
                         onChangeText={handleChange('password')}
                         onBlur={handleBlur('password')}
                         value={values.password}
                         placeholder={'password'}
                         secureTextEntry={true}
+                        placeholder="Password"
+                        leftIcon={{ type: 'font-awesome', name: 'lock' }}
+                        style={styles}
                     />
-                    <Button onPress={handleSubmit} title="Submit" />
+                    <Button onPress={handleSubmit} title="SIGN UP" style={styles.button} type='outline' />
+                    <Text onPress={goToConnection} style={styles.text}>U already have an account ?</Text>
+
                 </View>
             )}
         </Formik>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFF700',
+        marginTop: 50,
+    },
+    text: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 20,
+        fontWeight: 'bold',
+        backgroundColor: '#fff',
+        marginLeft: 70,
+    },
+    textinput: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: 30,
+        fontWeight: 'bold',
+    },
+    button: {
+        color: '#FFF700'
+    }
+});
 
 export default Inscription

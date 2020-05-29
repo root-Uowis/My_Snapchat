@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Container, Content } from 'native-base';
 import Swiper from 'react-native-swiper';
 import { Camera } from 'expo-camera';
+import Users from './Users'
 
 export default function CameraComponent() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -53,15 +54,14 @@ export default function CameraComponent() {
                         : Camera.Constants.Type.back
                     );
                   }}>
-                  <Text style={{ fontSize: 18, marginBottom: 10, color: 'white' }}> Flip </Text>
+                  <Text style={{ fontSize: 18, flex: 1,color: 'white' }}> Flip </Text>
                 </TouchableOpacity>
               </View>
             </Camera>
           </View>
 
           <View style={styles.container}>
-            <Text style={styles.text} > Stories
-              </Text>
+            <Users />
           </View >
         </Swiper>
       </Content >
