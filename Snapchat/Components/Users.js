@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
@@ -12,23 +12,25 @@ const goToCamera = () => {
 }
 
 const Users = () => {
-    const UsersArray = [];
+    const [UsersArray] = useState([])
     useEffect(() => {
         (async () => {
-            var token = await JSON.stringify(SecureStore.getItemAsync('secure_token'))
-
-            axios(`http://snapi.epitech.eu/all`, {
+            var token = await SecureStore.getItemAsync('secure_token')
+           await axios(`http://snapi.epitech.eu/all`, {
                 method: "GET",
                 headers: {
-                    'token': token
+                    'token': token,
+                    'timeout':1000,
+                    'maxContentLength': 2000
+
                 }
             }).then(status => {
                 console.log(status);
                 if (status.status == 200) {
                     console.log(status.data.data)
-                } else {
-
-                }
+                    // UsersArray.push(status.data.data)
+                    // console.log(UsersArray)
+                } 
             }).catch(error => {
                 console.log(error)
             })
