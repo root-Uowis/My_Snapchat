@@ -11,7 +11,7 @@ export default function App() {
       <Scene key="root">
         <Scene key="inscription" component={Inscription} title="Register" initial={true} />
         <Scene key="connection" component={Connection} title="Login" />
-        <Scene key="camera" component={Camera} title="SNAP" />
+        <Scene key="camera" component={Camera} title="Snap" />
       </Scene>
     </Router>
   );

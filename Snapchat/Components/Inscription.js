@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { Button, Input } from 'react-native-elements';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { Input } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { Formik } from 'formik';
 import axios from 'axios';
@@ -23,10 +23,10 @@ const Inscription = () => {
             }).catch(error => {
                 console.log(error)
             })}
-
+                style={{flex:1}}
         >
             {({ handleChange, handleBlur, handleSubmit, values }) => (
-                <View >
+                <View style={{flex:1,justifyContent:"space-around"}}>
                     <Input
                         onChangeText={handleChange('email')}
                         onBlur={handleBlur('email')}
@@ -52,7 +52,7 @@ const Inscription = () => {
                         leftIcon={{ type: 'font-awesome', name: 'lock' }}
                         style={styles}
                     />
-                    <Button onPress={handleSubmit} title="SIGN UP" style={styles.button} type='outline' />
+                    <Button onPress={handleSubmit} title="Sign Up" color="#dA2c38"  />
                     <Text onPress={goToConnection} style={styles.text}>U already have an account ?</Text>
 
                 </View>
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
         backgroundColor: '#fff',
-        marginLeft: 70,
+        marginLeft: 60,
+        marginBottom: 80,
     },
     textinput: {
         justifyContent: 'center',
@@ -83,9 +84,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         fontWeight: 'bold',
     },
-    button: {
-        color: '#FFF700'
-    }
 });
 
 export default Inscription

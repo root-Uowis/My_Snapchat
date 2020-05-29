@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { Button, Input } from 'react-native-elements';
+import { StyleSheet,Button, View, TextInput } from 'react-native';
+import {  Input } from 'react-native-elements';
 import { Actions } from 'react-native-router-flux';
 import { Formik } from 'formik';
 import axios from 'axios';
@@ -34,10 +34,10 @@ function Connection() {
       }).catch(error => {
         console.log(error)
       })}
-
+      style={{flex:1,}}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
-        <View >
+        <View style={{flex:1,justifyContent:"space-around"}}>
           <Input
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
@@ -63,7 +63,7 @@ function Connection() {
             leftIcon={{ type: 'font-awesome', name: 'lock' }}
             style={styles}
           />
-          <Button onPress={handleSubmit} title="LOGIN" />
+          <Button onPress={handleSubmit} title="Login" color="#DA2C38" />
         </View>
       )}
     </Formik>

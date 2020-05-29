@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icons from 'react-native-vector-icons/FontAwesome5';
 import { Container, Content } from 'native-base';
 import Swiper from 'react-native-swiper';
 import { Camera } from 'expo-camera';
@@ -30,7 +32,7 @@ export default function CameraComponent() {
           showsPagination={false}
           index={1}
         >
-          <View style={styles.container}>
+          <View style={styles.containerr}>
             <Text style={styles.text}> Snap </Text>
           </View >
           <View style={{ flex: 1 }}>
@@ -43,9 +45,9 @@ export default function CameraComponent() {
                 }}>
                 <TouchableOpacity
                   style={{
-                    flex: 0.1,
+                    flex: 0.2,
                     alignSelf: 'flex-end',
-                    alignItems: 'center',
+                    alignItems: 'flex-end',
                   }}
                   onPress={() => {
                     setType(
@@ -54,9 +56,31 @@ export default function CameraComponent() {
                         : Camera.Constants.Type.back
                     );
                   }}>
-                  <Text style={{ fontSize: 18, flex: 1,color: 'white' }}> Flip </Text>
+                  <Icons style={{ fontSize: 40, flex: 0.95, color: 'white' }} name="camera" />
+                </TouchableOpacity>
+                <TouchableOpacity
+                style={{
+                  flex: 1.2,
+                  alignSelf: 'flex-end',
+                  alignItems: "flex-end",
+                }}
+                >
+                  <Icons name="snapchat" style={{fontSize:40,flex:0.95,color:"#FFFF"}} />
                 </TouchableOpacity>
               </View>
+              <TouchableOpacity style={{ flex: 0.3 }}>
+                <View>
+                  <Icon style={{
+                    fontSize: 100,
+                    fontWeight: 'bold',
+                    alignSelf: 'center',
+                    alignItems: 'baseline',
+                    color: "#FFFF"
+                  }}
+                    name="bullseye"
+                  />
+                </View>
+              </TouchableOpacity>
             </Camera>
           </View>
 
@@ -74,10 +98,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFF700'
+    backgroundColor: '#F2FF49'
   },
-  text: {
-    fontSize: 30,
-    fontWeight: 'bold'
-  }
+  containerr: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#DA2C38'
+  },
 });
